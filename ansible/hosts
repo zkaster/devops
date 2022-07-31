@@ -1,0 +1,7 @@
+[servers]
+  ansible_c1 ansible_host=192.168.0.114
+  ansible_c2 ansible_host=192.168.0.115
+  ansible_c3 ansible_host=192.168.0.0
+
+[all:vars]
+  ansible_python_interpreter=/usr/bin/python3

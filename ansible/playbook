@@ -1,0 +1,29 @@
+---
+- name: Ping servers
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Ping ansible-cl1 and ansible-cl2
+    ping:
+  - name: Copy file test-dir
+    copy:
+     src: /home/zkaster/ansible/Dockerfile
+     dest: /home/zkaster/Dockerfile
+  - name: Copy file nginx conf
+    copy:
+     src: /home/zkaster/ansible/test.conf
+     dest: /home/zkaster/test.conf
+  - name: Copy WEB files
+    copy:
+     src: index.html
+     dest: index.html
+  - name: Build Docker Nginx from Dockerfile
+    shell:
+      cmd: 'docker build -t nginx22 .'
+
+  - name: Docker start
+    shell:
+     cmd: 'docker run -d --name nginx33 -p 80:80 -v /home/zkaster/index.html:/opt/app/html/index.html nginx22'
+
+
